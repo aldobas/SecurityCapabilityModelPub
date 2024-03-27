@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE p:nsfCatalogue [
-  <!ENTITY securityCapabilities 	SYSTEM "SecurityCapabilities.xml">
-  <!ENTITY genericPacketFilter 		SYSTEM "genericPacketFilter.xml">
-  <!ENTITY IpTables 				SYSTEM "IpTables.xml">
-  <!ENTITY PF-OpenBSD-PacketFilter 	SYSTEM "PF-OpenBSD-PacketFilter.xml">
-  <!ENTITY sonaeOperatorOutput 		SYSTEM "sonaeOperatorOutput.xml">
-  <!ENTITY Squid 					SYSTEM "Squid.xml">
-  <!ENTITY StrongSwan 				SYSTEM "StrongSwan.xml">
-  <!ENTITY XFRM 					SYSTEM "XFRM.xml">
+  <!ENTITY securityCapabilities     SYSTEM "SecurityCapabilities.xml">
+  <!ENTITY genericPacketFilter      SYSTEM "genericPacketFilter.xml">
+  <!ENTITY IpTables                 SYSTEM "IpTables.xml">
+  <!ENTITY PF-OpenBSD-PacketFilter  SYSTEM "PF-OpenBSD-PacketFilter.xml">
+  <!ENTITY sonaeOperatorOutput      SYSTEM "sonaeOperatorOutput.xml">
+  <!ENTITY Squid                    SYSTEM "Squid.xml">
+  <!ENTITY StrongSwan               SYSTEM "StrongSwan.xml">
+  <!ENTITY XFRM                     SYSTEM "XFRM.xml">
 ]>
 <p:nsfCatalogue xmlns:p="http://untitled/capability_data_model.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="capability_data_model.xsd">
-	<!-- List of Security Capabilities -->
-	&securityCapabilities;
+    <!-- List of Security Capabilities -->
+    &securityCapabilities;
 
-	<!-- List of nSF entities and their capabilityTranslationDetails -->
-	&genericPacketFilter;
-	&IpTables;
-	&PF-OpenBSD-PacketFilter;
-	&sonaeOperatorOutput;
-	&Squid;
-	&StrongSwan;
-	&XFRM;
+    <!-- List of nSF entities and their capabilityTranslationDetails -->
+    &genericPacketFilter;
+    &IpTables;
+    &PF-OpenBSD-PacketFilter;
+    &sonaeOperatorOutput;
+    &Squid;
+    &StrongSwan;
+    &XFRM;
 
-	<resolutionStrategyDetails>
-		<resolutionStrategyName>FMR</resolutionStrategyName>
-		<requiredExternalData>priority</requiredExternalData>
-	</resolutionStrategyDetails>
+    <resolutionStrategyDetails>
+        <resolutionStrategyName>FMR</resolutionStrategyName>
+        <requiredExternalData>priority</requiredExternalData>
+    </resolutionStrategyDetails>
 </p:nsfCatalogue>

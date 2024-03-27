@@ -20,7 +20,7 @@
     <securityCapability ref="AhReservedConditionCapability" />
     <securityCapability ref="BpfConditionCapability" />
     <securityCapability ref="ClusterTotalNodeConditionCapability" />
-    <securityCapability ref="ClusterLocalNodeCondtionCapability" />
+    <securityCapability ref="ClusterLocalNodeConditionCapability" />
     <securityCapability ref="ClusterNodeMaskConditionCapability" />
     <securityCapability ref="ClusterNodeHashConditionCapability" />
     <securityCapability ref="CommentConditionCapability" />
@@ -55,7 +55,7 @@
     <securityCapability ref="DscpClassConditionCapability" />
     <securityCapability ref="DscpConditionCapability" />
     <securityCapability ref="DstLengthConditionCapability" />
-    <securityCapability ref="DstOptsCondtionCapability" />
+    <securityCapability ref="DstOptsConditionCapability" />
     <securityCapability ref="EcnIpv4EctActionCapability" />
     <securityCapability ref="EspSpiConditionCapability" />
     <securityCapability ref="Eui64ConditionCapability" />
@@ -148,12 +148,12 @@
     <securityCapability ref="AcceptActionCapability"/>
     <securityCapability ref="RejectActionCapability"/>
     <securityCapability ref="LooseConditionCapability" />
-    <securityCapability ref="ValdimarkCondtionCapability" />
+    <securityCapability ref="ValdimarkConditionCapability" />
     <securityCapability ref="AcceptLocalConditionCapability" />
     <securityCapability ref="InvertConditionCapability" />
     <securityCapability ref="RtTypeConditionCapability" />
     <securityCapability ref="RtSegsleftConditionCapability" />
-    <securityCapability ref="RtLenCondtionCapability" />
+    <securityCapability ref="RtLenConditionCapability" />
     <securityCapability ref="Rt0resConditionCapability" />
     <securityCapability ref="Rt0addrsConditionCapability" />
     <securityCapability ref="Rt0notStrictConditionCapability" />
@@ -773,7 +773,7 @@
 
 <capabilityTranslationDetails>
     <nSF ref="IpTables" />
-    <securityCapability ref="DstOptsCondtionCapability" />
+    <securityCapability ref="DstOptsConditionCapability" />
     <commandName>
         <realCommandName>--dst-opts</realCommandName>
     </commandName>
@@ -1202,7 +1202,7 @@
 
 <capabilityTranslationDetails>
     <nSF ref="IpTables" />
-    <securityCapability ref="ClusterLocalNodeCondtionCapability" />
+    <securityCapability ref="ClusterLocalNodeConditionCapability" />
     <commandName>
         <realCommandName>--cluster-local-node</realCommandName>
     </commandName>
@@ -4936,7 +4936,7 @@
 
 <capabilityTranslationDetails>
     <nSF ref="IpTables" />
-    <securityCapability ref="ValdimarkCondtionCapability" />
+    <securityCapability ref="ValdimarkConditionCapability" />
     <commandName>
         <realCommandName>--validmark</realCommandName>
     </commandName>
@@ -5090,7 +5090,7 @@
 
 <capabilityTranslationDetails>
     <nSF ref="IpTables" />
-    <securityCapability ref="RtLenCondtionCapability" />
+    <securityCapability ref="RtLenConditionCapability" />
     <commandName>
         <realCommandName>--rt-len</realCommandName>
     </commandName>
