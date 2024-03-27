@@ -1,0 +1,1119 @@
+<nSF id="Squid">
+    <nsfPolicyDetails>
+        <capabilityStart>acl %counter</capabilityStart>
+    </nsfPolicyDetails>
+    <securityCapability ref="IpSourceAddressConditionCapability"/>
+    <securityCapability ref="IpDestinationAddressConditionCapability"/>
+    <securityCapability ref="IpLocalAddressConditionCapability"/>
+    <securityCapability ref="MacConditionCapability"/>
+    <securityCapability ref="SourceDomainConditionCapability"/>
+    <securityCapability ref="DestinationDomainConditionCapability"/>
+    <securityCapability ref="SourceASConditionCapability"/>
+    <securityCapability ref="DestinationASConditionCapability"/>
+    <securityCapability ref="CacheNameConditionCapability"/>
+    <securityCapability ref="TimeConditionCapability"/>
+    <securityCapability ref="UrlRegexConditionCapability"/>
+    <securityCapability ref="UrlPathRegexConditionCapability"/>
+    <securityCapability ref="DestinationPortConditionCapability"/>
+    <securityCapability ref="LocalPortConditionCapability"/>
+    <securityCapability ref="PortNameConditionCapability"/>
+    <securityCapability ref="IpProtocolTypeConditionCapability"/>
+    <securityCapability ref="HttpMethodConditionCapability"/>
+    <securityCapability ref="HttpStatusConditionCapability"/>
+    <securityCapability ref="HttpBrowserConditionCapability"/>
+    <securityCapability ref="HttpRefererConditionCapability"/>
+    <securityCapability ref="HttpUsernameConditionCapability"/>
+    <securityCapability ref="HttpProxyAuthConditionCapability"/>
+    <securityCapability ref="HttpSmnpConditionCapability"/>
+    <securityCapability ref="NumberConnectionsConditionCapability"/>
+    <securityCapability ref="IpMaxConnectionConditionCapability"/>
+    <securityCapability ref="HttpReqMimeConditionCapability"/>
+    <securityCapability ref="HttpReqHdrConditionCapability"/>
+    <securityCapability ref="HttpRespMimeConditionCapability"/>
+    <securityCapability ref="HttpRespHdrConditionCapability"/>
+    <securityCapability ref="CertificateAutorityConditionCapability"/>
+    <securityCapability ref="UserSSLCertificateConditionCapability"/>
+
+    <securityCapability ref="AcceptActionCapability"/>
+    <securityCapability ref="RejectActionCapability"/>
+
+    <securityCapability ref="DefaultActionCapabilitySpec"/>
+</nSF>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="IpSourceAddressConditionCapability" />
+    <commandName>
+        <realCommandName>src</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <preferredExpansionMethod>
+        <expansionMethod>
+            <fromOperator>rangeMask</fromOperator>
+            <toOperator>rangeCIDR</toOperator>
+        </expansionMethod>
+    </preferredExpansionMethod>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeMask</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="IpDestinationAddressConditionCapability" />
+    <commandName>
+        <realCommandName>dst</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <preferredExpansionMethod>
+        <expansionMethod>
+            <fromOperator>rangeMask</fromOperator>
+            <toOperator>rangeCIDR</toOperator>
+        </expansionMethod>
+    </preferredExpansionMethod>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <!-- <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator> -->
+    <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeMask</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="IpLocalAddressConditionCapability" />
+    <commandName>
+        <realCommandName>myip</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <preferredExpansionMethod>
+        <expansionMethod>
+            <fromOperator>rangeMask</fromOperator>
+            <toOperator>rangeCIDR</toOperator>
+        </expansionMethod>
+    </preferredExpansionMethod>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <!-- <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator> -->
+    <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeMask</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid"/>
+    <securityCapability ref="MacConditionCapability" />
+    <commandName>
+        <realCommandName>arp</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^([0-9a-fA-F]{1,2}[.:-]){5}([0-9a-fA-F]{1,2})$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid"/>
+    <securityCapability ref="DestinationDomainConditionCapability" />
+    <commandName>
+        <realCommandName>dstdomain</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>dstdom_regex</realCommandName>
+        <commandNameCondition>
+            <!-- Dà errore durante la generazione del linguaggio -->
+            <!-- <attributeCheck>isRegex</attributeCheck> -->
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid"/>
+    <securityCapability ref="SourceDomainConditionCapability" />
+    <commandName>
+        <realCommandName>srcdomain</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>srcdom_regex</realCommandName>
+        <commandNameCondition>
+            <!-- Dà errore durante la generazione del linguaggio -->
+            <!-- <attributeCheck>isRegex</attributeCheck> -->
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="DestinationASConditionCapability" />
+    <commandName>
+        <realCommandName>dst_as</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="SourceASConditionCapability" />
+    <commandName>
+        <realCommandName>src_as</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid"/>
+    <securityCapability ref="CacheNameConditionCapability" />
+    <commandName>
+        <realCommandName>peername</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid"/>
+    <securityCapability ref="TimeConditionCapability" />
+    <commandName>
+        <realCommandName>time</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^(S|M|T|W|H|F|A)$|^((([0][0-9])|([1-2][0-3]))?\:([1-5][0-9]|[0][0-9]))\-((([0][0-9])|([1-2][0-3]))?\:([1-5][0-9]|[0][0-9]))$|^((S|M|T|W|H|F|A) ((([0][0-9])|([1-2][0-3]))?\:([1-5][0-9]|[0][0-9]))\-((([0][0-9])|([1-2][0-3]))?\:([1-5][0-9]|[0][0-9])))$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid"/>
+    <securityCapability ref="UrlRegexConditionCapability" />
+    <commandName>
+        <realCommandName>url_regex</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator/>
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid"/>
+    <securityCapability ref="UrlPathRegexConditionCapability" />
+    <commandName>
+        <realCommandName>urlpath_regex</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator/>
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="DestinationPortConditionCapability" />
+    <commandName>
+        <realCommandName>port</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <!-- <preVariable>elementRange</preVariable> -->
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <!-- <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+        <newCommandName>
+            <realCommandName>-m multiport - -dports</realCommandName>
+        </newCommandName>
+        <newCommandName>
+            <realCommandName>! -m multiport - -dports</realCommandName>
+            <commandNameCondition>
+                <attributeName>operation</attributeName>
+                <attributeValue>NOT_EQUAL_TO</attributeValue>
+            </commandNameCondition>
+        </newCommandName>
+    </bodyConcatenator> -->
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+        <integerRange>
+            <from>15</from>
+            <to>1</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="LocalPortConditionCapability" />
+    <commandName>
+        <realCommandName>myport</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <!-- <preVariable>elementRange</preVariable> -->
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <!-- <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+        <newCommandName>
+            <realCommandName>-m multiport - -dports</realCommandName>
+        </newCommandName>
+        <newCommandName>
+            <realCommandName>! -m multiport - -dports</realCommandName>
+            <commandNameCondition>
+                <attributeName>operation</attributeName>
+                <attributeValue>NOT_EQUAL_TO</attributeValue>
+            </commandNameCondition>
+        </newCommandName>
+    </bodyConcatenator> -->
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+        <integerRange>
+            <from>15</from>
+            <to>1</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid"/>
+    <securityCapability ref="PortNameConditionCapability" />
+    <commandName>
+        <realCommandName>myportname</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator/>
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="IpProtocolTypeConditionCapability" />
+    <commandName>
+        <realCommandName>proto</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="HttpMethodConditionCapability" />
+    <commandName>
+        <realCommandName>method</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^(GET|POST|PUT|DELETE)$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^(GET|POST|PUT|DELETE)$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="HttpStatusConditionCapability" />
+    <commandName>
+        <realCommandName>http_status</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^[1-5][0-9]{2}$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^[1-5][0-9]{2}$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="HttpBrowserConditionCapability" />
+    <commandName>
+        <realCommandName>browser</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="HttpRefererConditionCapability" />
+    <commandName>
+        <realCommandName>referer_regex</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+             <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="HttpUsernameConditionCapability" />
+    <commandName>
+        <realCommandName>ident</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>ident_regex</realCommandName>
+        <commandNameCondition>
+            <!-- Dà errore durante la generazione del linguaggio -->
+            <!-- <attributeCheck>isRegex</attributeCheck> -->
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="HttpProxyAuthConditionCapability" />
+    <commandName>
+        <realCommandName>proxy_auth</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>proxy_auth_regex</realCommandName>
+        <commandNameCondition>
+            <!-- Dà errore durante la generazione del linguaggio -->
+            <!-- <attributeCheck>isRegex</attributeCheck> -->
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="HttpSmnpConditionCapability" />
+    <commandName>
+        <realCommandName>snmp_community</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="NumberConnectionsConditionCapability" />
+    <commandName>
+        <realCommandName>maxconn</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="IpMaxConnectionConditionCapability" />
+    <commandName>
+        <realCommandName>max_user_ip</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="HttpReqMimeConditionCapability" />
+    <commandName>
+        <realCommandName>req_mime_type</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="HttpReqHdrConditionCapability" />
+    <commandName>
+        <realCommandName>req_header</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="HttpRespMimeConditionCapability" />
+    <commandName>
+        <realCommandName>rep_mime_type</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="HttpRespHdrConditionCapability" />
+    <commandName>
+        <realCommandName>rep_header</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="CertificateAutorityConditionCapability" />
+    <commandName>
+        <realCommandName>ca_cert</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid" />
+    <securityCapability ref="UserSSLCertificateConditionCapability" />
+    <commandName>
+        <realCommandName>user_cert</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid"/>
+    <securityCapability ref="AcceptActionCapability" />
+    <commandName>
+        <realCommandName>http_access allow</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n#--------------------</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <conditionalDependency>
+            <nextItem>acls</nextItem>
+        </conditionalDependency>
+    </dependency>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="Squid"/>
+    <securityCapability ref="RejectActionCapability" />
+    <commandName>
+        <realCommandName>http_access deny</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <clauseConcatenator>\n#--------------------</clauseConcatenator>
+    <dependency>
+        <conditionalDependency>
+            <nextItem>acls</nextItem>
+        </conditionalDependency>
+    </dependency>
+</capabilityTranslationDetails>

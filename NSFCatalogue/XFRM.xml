@@ -1,0 +1,1260 @@
+<nSF id="XFRM">
+    <nsfPolicyDetails>
+        <ruleStart>ip xfrm</ruleStart>
+        <ruleEnd />
+        <policyTrailer />
+        <policyEncoding />
+        <policyAttribute>
+            <attributeName>ipSecAction</attributeName>
+        </policyAttribute>
+        <ruleAttribute>
+            <attributeName>ruleType</attributeName>
+        </ruleAttribute>
+        <ruleAttributeDetails ref="ruleType">
+            <mappingDetails>
+                <key>SecurityAssociation</key>
+                <value>state</value>
+            </mappingDetails>
+            <mappingDetails>
+                <key>SecurityPolicy</key>
+                <value>policy</value>
+            </mappingDetails>
+        </ruleAttributeDetails>
+        <!-- <ruleAttributeDetails ref="ruru">
+            <mappingDetails>
+                <key>susu</key>
+                <value>state</value>
+            </mappingDetails>
+        </ruleAttributeDetails> -->
+        <defaultSecurityCapability>ipSecRuleTypeActionCapability</defaultSecurityCapability>
+    </nsfPolicyDetails>
+    <securityCapability ref="IpSecRuleTypeActionCapability" />
+    <securityCapability ref="ManualOperationActionCapability" />
+    <securityCapability ref="IpSourceAddressConditionCapability" />
+    <securityCapability ref="IpDestinationAddressConditionCapability" />
+    <securityCapability ref="ContextConditionCapability" />
+    <securityCapability ref="InterfaceConditionCapability" />
+    <securityCapability ref="PolicyTypeConditionCapability" />
+    <securityCapability ref="PolicyDirConditionCapability" />
+    <securityCapability ref="PolicySpiConditionCapability" />
+    <securityCapability ref="PolicyReqidConditionCapability" />
+    <securityCapability ref="ReplayWindowConditionCapability" />
+    <securityCapability ref="ReplaySeqConditionCapability" />
+    <securityCapability ref="ReplaySeqHiConditionCapability" />
+    <securityCapability ref="ReplayOseqConditionCapability" />
+    <securityCapability ref="ReplayOseqHiConditionCapability" />
+    <securityCapability ref="SequenceConditionCapability" />
+    <securityCapability ref="PriorityConditionCapability" />
+    <securityCapability ref="ConnmarkConditionCapability" />
+    <securityCapability ref="LimitXFRMConditionCapability" />
+    <securityCapability ref="LevelConditionCapability" />
+    <securityCapability ref="DeviceDestinationConditionCapability" />
+    <securityCapability ref="PacketEncapsulationActionCapability" />
+    <securityCapability ref="DataAuthenticationActionCapability" />
+    <securityCapability ref="EncryptionActionCapability" />
+    <securityCapability ref="AEADActionCapability" />
+    <securityCapability ref="TypeOfEncapActionCapability" />
+    <securityCapability ref="CompressionActionCapability" />
+    <securityCapability ref="SourcePortConditionCapability" />
+    <securityCapability ref="DestinationPortConditionCapability" />
+    <securityCapability ref="FlagConditionCapability" />
+    <securityCapability ref="ExtraFlagConditionCapability" />
+    <securityCapability ref="IpProtocolTypeConditionCapability" />
+    <securityCapability ref="IcmpConditionCapability" />
+    <securityCapability ref="Icmp6ConditionCapability" />
+    <securityCapability ref="MobilityHeaderConditionCapability" />
+    <securityCapability ref="GreConditionCapability" />
+    <securityCapability ref="AcceptActionCapability" />
+    <securityCapability ref="RejectActionCapability" />
+    <securityCapability ref="PolicyActionCapability" />
+    <securityCapability ref="SelectorConditionCapability" />
+    <securityCapability ref="TemplateConditionCapability" />
+</nSF>
+
+<languageGenerationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="PolicyActionCapability" />
+    <enumerationName>ManualOperationEnumeration</enumerationName>
+    <modifyDefault>
+        <removeValue>count</removeValue>
+        <removeValue>allocspi</removeValue>
+    </modifyDefault>
+</languageGenerationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="IpSecRuleTypeActionCapability" />
+    <commandName>
+        <supportRuleAttribute>ruleType</supportRuleAttribute>
+    </commandName>
+    <supportPolicyAttribute>ipSecAction</supportPolicyAttribute>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="ManualOperationActionCapability" />
+    <commandName>
+        <realCommandName>state</realCommandName>
+    </commandName>
+    <dependency>
+        <absenceOfValue>policy</absenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="IpSourceAddressConditionCapability" />
+    <commandName>
+        <realCommandName>src</realCommandName>
+    </commandName>
+    <preferredExpansionMethod>
+        <expansionMethod>
+            <fromOperator>rangeMask</fromOperator>
+            <toOperator>rangeCIDR</toOperator>
+        </expansionMethod>
+    </preferredExpansionMethod>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeMask</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <absenceOfValue>policy</absenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <absenceOfValue>state</absenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+    </dependency>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="IpDestinationAddressConditionCapability" />
+    <commandName>
+        <realCommandName>dst</realCommandName>
+    </commandName>
+    <preferredExpansionMethod>
+        <expansionMethod>
+            <fromOperator>rangeMask</fromOperator>
+            <toOperator>rangeCIDR</toOperator>
+        </expansionMethod>
+    </preferredExpansionMethod>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeMask</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpSourceAddressConditionCapability</presenceOfCapability>
+    </dependency>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="ContextConditionCapability" />
+    <commandName>
+        <realCommandName>ctx</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfValue>add</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfValue>update</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfValue>delete</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="InterfaceConditionCapability" />
+    <commandName>
+        <realCommandName>if_id</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfValue>add</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfValue>update</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfValue>delete</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="PolicyTypeConditionCapability" />
+    <commandName>
+        <realCommandName>ptype</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfValue>policy</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="PolicyDirConditionCapability" />
+    <commandName>
+        <realCommandName>dir</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfValue>policy</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="PolicySpiConditionCapability" />
+    <commandName>
+        <realCommandName>spi</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfValue>policy</presenceOfValue>
+        <presenceOfValue>tmpl</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="PolicyReqidConditionCapability" />
+    <commandName>
+        <realCommandName>reqid</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>TemplateConditionCapability</presenceOfCapability>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="ReplayWindowConditionCapability" />
+    <commandName>
+        <realCommandName>replay-window</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>add</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>update</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="ReplaySeqConditionCapability" />
+    <commandName>
+        <realCommandName>replay-seq</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>add</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>update</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="ReplaySeqHiConditionCapability" />
+    <commandName>
+        <realCommandName>replay-seq-hi</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>add</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>update</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="ReplayOseqConditionCapability" />
+    <commandName>
+        <realCommandName>replay-oseq</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>add</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>update</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="ReplayOseqHiConditionCapability" />
+    <commandName>
+        <realCommandName>replay-oseqhi</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>add</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>update</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="SequenceConditionCapability" />
+    <commandName>
+        <realCommandName>seq</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>add</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>update</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="PriorityConditionCapability" />
+    <commandName>
+        <realCommandName>priority</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfValue>policy</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="ConnmarkConditionCapability" />
+    <commandName>
+        <realCommandName>mark</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>output-mark</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator> mask </realConcatenator>
+        <concatenatorCondition>
+            <preVariable>value</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>add</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>update</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>delete</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>add</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>update</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>delete</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="LimitXFRMConditionCapability" />
+    <commandName>
+        <realCommandName>limit</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>type</preVariable>
+            <postVariable>value</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>add</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>update</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfValue>policy</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="LevelConditionCapability" />
+    <commandName>
+        <realCommandName>level</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>TemplateConditionCapability</presenceOfCapability>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="DeviceDestinationConditionCapability" />
+    <commandName>
+        <realCommandName>dev</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>SelectorConditionCapability</presenceOfCapability>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="PacketEncapsulationActionCapability" />
+    <commandName>
+        <realCommandName>mode</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfValue>esp</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfValue>ah</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>TemplateConditionCapability</presenceOfCapability>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="DataAuthenticationActionCapability" />
+    <commandName>
+        <realCommandName>auth</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>auth-trunc</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator>(</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>algoHash</postVariable>
+        </concatenatorCondition>
+        <postConcatenator>)</postConcatenator>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoHash</preVariable>
+            <postVariable>key</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>key</preVariable>
+            <postVariable>truncationLenght</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>ah</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>esp</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="EncryptionActionCapability" />
+    <commandName>
+        <realCommandName>enc</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator>(</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>algoEnc</postVariable>
+        </concatenatorCondition>
+        <postConcatenator>)</postConcatenator>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator> </realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoEnc</preVariable>
+            <postVariable>key</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>algoEnc</attributeName>
+        <transform>removeAESTrailingNumbers</transform>
+    </bodyValueRestriciton>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>esp</presenceOfValue>
+    </dependency>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="AEADActionCapability" />
+    <commandName>
+        <realCommandName>aead</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator>(</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>algoAEAD</postVariable>
+        </concatenatorCondition>
+        <postConcatenator>)</postConcatenator>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>algoAEAD</preVariable>
+            <postVariable>key</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>key</preVariable>
+            <postVariable>integrityCheckLenght</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>algoAEAD</attributeName>
+        <transform>removeAESTrailingNumbers</transform>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>mode</attributeName>
+        <transform>removeTrailingNumbers</transform>
+    </bodyValueRestriciton>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>esp</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="TypeOfEncapActionCapability" />
+    <commandName>
+        <realCommandName>encap</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>encapMode</preVariable>
+            <postVariable>srcPort</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>srcPort</preVariable>
+            <postVariable>dstPort</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>dstPort</preVariable>
+            <postVariable>originalAddr</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+        <presenceOfValue>esp</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="CompressionActionCapability" />
+    <commandName>
+        <realCommandName>comp</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>comp</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="SourcePortConditionCapability" />
+    <commandName>
+        <realCommandName>sport</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startValue</preVariable>
+            <postVariable>endValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startName</preVariable>
+            <postVariable>endName</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startValue</preVariable>
+            <postVariable>endName</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startName</preVariable>
+            <postVariable>endValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>startValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>endValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+        <integerRange>
+            <from>15</from>
+            <to>1</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>tcp</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>udp</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>sctp</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>dccp</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="DestinationPortConditionCapability" />
+    <commandName>
+        <realCommandName>dport</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startValue</preVariable>
+            <postVariable>endValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startName</preVariable>
+            <postVariable>endName</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startValue</preVariable>
+            <postVariable>endName</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startName</preVariable>
+            <postVariable>endValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>startValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>endValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+        <integerRange>
+            <from>15</from>
+            <to>1</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>tcp</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>udp</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>sctp</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>dccp</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="FlagConditionCapability" />
+    <commandName>
+        <realCommandName>flag</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+    </dependency>
+    <dependency>
+        <presenceOfValue>policy</presenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="ExtraFlagConditionCapability" />
+    <commandName>
+        <realCommandName>extra-flag</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="IpProtocolTypeConditionCapability" />
+    <commandName>
+        <realCommandName>proto</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpSourceAddressConditionCapability</presenceOfCapability>
+        <presenceOfCapability>IpDestinationAddressConditionCapability</presenceOfCapability>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="IcmpConditionCapability" />
+    <commandName>
+        <realCommandName>proto icmp</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator> code </realConcatenator>
+        <concatenatorCondition>
+            <preVariable>type</preVariable>
+            <postVariable>code</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpSourceAddressConditionCapability</presenceOfCapability>
+        <presenceOfCapability>IpDestinationAddressConditionCapability</presenceOfCapability>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="Icmp6ConditionCapability" />
+    <commandName>
+        <realCommandName>proto ipv6-icmp</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator> code </realConcatenator>
+        <concatenatorCondition>
+            <preVariable>type</preVariable>
+            <postVariable>code</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpSourceAddressConditionCapability</presenceOfCapability>
+        <presenceOfCapability>IpDestinationAddressConditionCapability</presenceOfCapability>
+    </dependency>
+    <internalClauseConcatenator>type</internalClauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="MobilityHeaderConditionCapability" />
+    <commandName>
+        <realCommandName>proto mobility-header</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator> code </realConcatenator>
+        <concatenatorCondition>
+            <preVariable>type</preVariable>
+            <postVariable>code</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="GreConditionCapability" />
+    <commandName>
+        <realCommandName>proto gre</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator>key </realConcatenator>
+        <concatenatorCondition>
+            <preVariable />
+            <postVariable>key</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpSourceAddressConditionCapability</presenceOfCapability>
+        <presenceOfCapability>IpDestinationAddressConditionCapability</presenceOfCapability>
+    </dependency>
+
+    <internalClauseConcatenator>type</internalClauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="AcceptActionCapability" />
+    <commandName>
+        <realCommandName>action allow</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="RejectActionCapability" />
+    <commandName>
+        <realCommandName>action block</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="PolicyActionCapability" />
+    <commandName>
+        <realCommandName>policy</realCommandName>
+    </commandName>
+    <dependency>
+        <absenceOfValue>state</absenceOfValue>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="SelectorConditionCapability" />
+    <commandName>
+        <realCommandName>sel</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="XFRM" />
+    <securityCapability ref="TemplateConditionCapability" />
+    <commandName>
+        <realCommandName>tmpl</realCommandName>
+    </commandName>
+    <dependency>
+        <presenceOfCapability>IpSecRuleTypeActionCapability</presenceOfCapability>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>

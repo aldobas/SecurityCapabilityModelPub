@@ -1,0 +1,1838 @@
+<nSF id="StrongSwan">
+    <nsfPolicyDetails>
+        <ruleStart>conn</ruleStart>
+        <ruleEnd />
+        <policyTrailer />
+        <policyEncoding />
+    </nsfPolicyDetails>
+    <securityCapability ref="AaaIdentityConditionCapablity" />
+    <securityCapability ref="DataAuthenticationActionCapability" />
+    <securityCapability ref="EncryptionActionCapability" />
+    <securityCapability ref="AggressiveActionCapability" />
+    <securityCapability ref="AutoActionCapability" />
+    <securityCapability ref="CloseActionCapability" />
+    <securityCapability ref="CompressionActionCapability" />
+    <securityCapability ref="DpdActionCapability" />
+    <securityCapability ref="DpdDelayConditionCapability" />
+    <securityCapability ref="DpdTimeoutConditionCapability" />
+    <securityCapability ref="InactivityConditionCapability" />
+    <securityCapability ref="EapIdentityConditionCapability" />
+    <securityCapability ref="PacketEncapsulationActionCapability" />
+    <securityCapability ref="FragmentationActionCapability" />
+    <securityCapability ref="AutoExchangeTypeActionCapability" />
+    <securityCapability ref="IkeActionCapability" />
+    <securityCapability ref="IkeDSCPConditionCapability" />
+    <securityCapability ref="IkeLifetimeConditionCapability" />
+    <securityCapability ref="PolicyInstallConditionCapability" />
+    <securityCapability ref="LifeBytesConditionCapability" />
+    <securityCapability ref="LifePacketsConditionCapability" />
+    <securityCapability ref="LifeTimeConditionCapability" />
+    <securityCapability ref="MarginBytesConditionCapability" />
+    <securityCapability ref="MarginPacketsConditionCapability" />
+    <securityCapability ref="MarginTimeConditionCapability" />
+    <securityCapability ref="ConnmarkConditionCapability" />
+    <securityCapability ref="MobikeConditionCapability" />
+    <securityCapability ref="ConfigurationModeConditionCapability" />
+    <securityCapability ref="RekeyConditionCapability" />
+    <securityCapability ref="RekeyfuzzConditionCapability" />
+    <securityCapability ref="ReplayWindowConditionCapability" />
+    <securityCapability ref="PolicyReqidConditionCapability" />
+    <securityCapability ref="SHA256_96ActionCapability" />
+    <securityCapability ref="TFCActionCapability" />
+    <securityCapability ref="TypeOfEncapActionCapability" />
+    <securityCapability ref="XAuthRoleConditionCapability" />
+    <securityCapability ref="XAuth_identityConditionCapability" />
+    <securityCapability ref="IpSourceAddressConditionCapability" />
+    <securityCapability ref="IpDestinationAddressConditionCapability" />
+    <securityCapability ref="SourceAuthActionCapability" />
+    <securityCapability ref="DestinationAuthActionCapability" />
+    <securityCapability ref="SourceCertificateAutorityConditionCapability" />
+    <securityCapability ref="DestinationCertificateAutorityConditionCapability" />
+    <securityCapability ref="SourceX509CertificateConditionCapability" />
+    <securityCapability ref="DestinationX509CertificateConditionCapability" />
+    <securityCapability ref="SourceCertificatePolicyConditionCapability" />
+    <securityCapability ref="DestinationCertificatePolicyConditionCapability" />
+    <securityCapability ref="SourceDNSConditionCapability" />
+    <securityCapability ref="DestinationDNSConditionCapability" />
+    <securityCapability ref="SourceFirewallActionCapability" />
+    <securityCapability ref="DestinationFirewallActionCapability" />
+    <securityCapability ref="SourceGroupConditionCapability" />
+    <securityCapability ref="DestinationGroupConditionCapability" />
+    <securityCapability ref="SourceIdentityConditionCapability" />
+    <securityCapability ref="DestinationIdentityConditionCapability" />
+    <securityCapability ref="SourcePortConditionCapability" />
+    <securityCapability ref="DestinationPortConditionCapability" />
+    <securityCapability ref="SourceRSAPublicKeyActionCapability" />
+    <securityCapability ref="DestinationRSAPublicKeyActionCapability" />
+    <securityCapability ref="SourcePublicKeyActionCapability" />
+    <securityCapability ref="DestinationPublicKeyActionCapability" />
+    <securityCapability ref="SourceSendCertificateConditionCapability" />
+    <securityCapability ref="DestinationSendCertificateConditionCapability" />
+    <securityCapability ref="AEADActionCapability" />
+    <securityCapability ref="IpProtocolTypeConditionCapability" />
+    <securityCapability ref="AlsoConditionCapability" />
+    <securityCapability ref="SourceSubnetConditionCapability" />
+    <securityCapability ref="DestinationSubnetConditionCapability" />
+    <securityCapability ref="ReauthenticationConditionCapability" />
+</nSF>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="AaaIdentityConditionCapablity" />
+    <commandName>
+        <realCommandName>aaa_identity</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="EncryptionActionCapability" />
+    <commandName>
+        <realCommandName />
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>algoEnc</preVariable>
+            <postVariable>mode</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>algoEnc</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>mode</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <conditionalDependency>
+            <nextCapability>DataAuthenticationActionCapability</nextCapability>
+            <separator>-</separator>
+        </conditionalDependency>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>esp</presenceOfValue>
+    </dependency>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DataAuthenticationActionCapability" />
+    <commandName>
+        <realCommandName />
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>algoHash</preVariable>
+            <postVariable>mode</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>algoHash</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>mode</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>esp</presenceOfValue>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>ah</presenceOfValue>
+    </dependency>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="AEADActionCapability" />
+    <commandName>
+        <realCommandName />
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoEnc</preVariable>
+            <postVariable>algoEnc</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoEnc</preVariable>
+            <postVariable>algoHash</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoHash</preVariable>
+            <postVariable>algoHash</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>algoEnc</preVariable>
+            <postVariable>mode</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>algoHash</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>algoEnc</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>integrity</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoHash</preVariable>
+            <postVariable>integrity</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoEnc</preVariable>
+            <postVariable>integrity</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>dhgroup</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>dhgroup</preVariable>
+            <postVariable>dhgroup</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoHash</preVariable>
+            <postVariable>dhgroup</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <!-- <internalClauseConcatenator>=</internalClauseConcatenator> -->
+    <internalClauseConcatenator></internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>proposal</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>proposal</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>esp</presenceOfValue>
+    </dependency>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="AutoActionCapability" />
+    <commandName>
+        <realCommandName>auto</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="CloseActionCapability" />
+    <commandName>
+        <realCommandName>closeaction</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="CompressionActionCapability" />
+    <commandName>
+        <realCommandName>compress</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DpdActionCapability" />
+    <commandName>
+        <realCommandName>dpdaction</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="AggressiveActionCapability" />
+    <commandName>
+        <realCommandName>aggressive</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DpdDelayConditionCapability" />
+    <commandName>
+        <realCommandName>dpddelay</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DpdTimeoutConditionCapability" />
+    <commandName>
+        <realCommandName>dpdtimeout</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="InactivityConditionCapability" />
+    <commandName>
+        <realCommandName>inactivity</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="TypeOfEncapActionCapability" />
+    <commandName>
+        <realCommandName>forceencaps</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="FragmentationActionCapability" />
+    <commandName>
+        <realCommandName>fragmentation</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="AutoExchangeTypeActionCapability" />
+    <commandName>
+        <realCommandName>keyexchange</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="IkeActionCapability" />
+    <commandName>
+        <realCommandName>ike</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoEnc</preVariable>
+            <postVariable>algoEnc</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoEnc</preVariable>
+            <postVariable>algoHash</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoHash</preVariable>
+            <postVariable>algoHash</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>algoEnc</preVariable>
+            <postVariable>mode</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>algoHash</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>algoEnc</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>integrity</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoHash</preVariable>
+            <postVariable>integrity</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoEnc</preVariable>
+            <postVariable>integrity</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mode</preVariable>
+            <postVariable>dhgroup</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>dhgroup</preVariable>
+            <postVariable>dhgroup</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>algoHash</preVariable>
+            <postVariable>dhgroup</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>proposal</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>proposal</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="IkeDSCPConditionCapability" />
+    <commandName>
+        <realCommandName>ikedscp</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="IkeLifetimeConditionCapability" />
+    <commandName>
+        <realCommandName>ikelifetime</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="PolicyInstallConditionCapability" />
+    <commandName>
+        <realCommandName>installpolicy</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="LifeBytesConditionCapability" />
+    <commandName>
+        <realCommandName>lifebytes</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="LifePacketsConditionCapability" />
+    <commandName>
+        <realCommandName>lifepackets</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="LifeTimeConditionCapability" />
+    <commandName>
+        <realCommandName>lifetime</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="MarginBytesConditionCapability" />
+    <commandName>
+        <realCommandName>marginbytes</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="MarginPacketsConditionCapability" />
+    <commandName>
+        <realCommandName>marginpackets</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="MarginTimeConditionCapability" />
+    <commandName>
+        <realCommandName>margintime</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="ConnmarkConditionCapability" />
+    <commandName>
+        <realCommandName>mark</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>mark_in</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>IN</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <commandName>
+        <realCommandName>mark_out=</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_IN</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>value</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="MobikeConditionCapability" />
+    <commandName>
+        <realCommandName>mobike</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="ConfigurationModeConditionCapability" />
+    <commandName>
+        <realCommandName>modeconfig</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="ReauthenticationConditionCapability" />
+    <commandName>
+        <realCommandName>reauth</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="RekeyConditionCapability" />
+    <commandName>
+        <realCommandName>rekey</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="RekeyfuzzConditionCapability" />
+    <commandName>
+        <realCommandName>rekeyfuzz</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="ReplayWindowConditionCapability" />
+    <commandName>
+        <realCommandName>replay_window</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="PolicyReqidConditionCapability" />
+    <commandName>
+        <realCommandName>reqid</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SHA256_96ActionCapability" />
+    <commandName>
+        <realCommandName>sha256_96</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="TFCActionCapability" />
+    <commandName>
+        <realCommandName>tfc</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="PacketEncapsulationActionCapability" />
+    <commandName>
+        <realCommandName>type</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="XAuthRoleConditionCapability" />
+    <commandName>
+        <realCommandName>xauth</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="XAuth_identityConditionCapability" />
+    <commandName>
+        <realCommandName>xauth_identity</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="IpSourceAddressConditionCapability" />
+    <commandName>
+        <realCommandName>left</realCommandName>
+    </commandName>
+    <preferredExpansionMethod>
+        <expansionMethod>
+            <fromOperator>rangeMask</fromOperator>
+            <toOperator>rangeCIDR</toOperator>
+        </expansionMethod>
+    </preferredExpansionMethod>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeMask</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="IpDestinationAddressConditionCapability" />
+    <commandName>
+        <realCommandName>right</realCommandName>
+    </commandName>
+    <preferredExpansionMethod>
+        <expansionMethod>
+            <fromOperator>rangeMask</fromOperator>
+            <toOperator>rangeCIDR</toOperator>
+        </expansionMethod>
+    </preferredExpansionMethod>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeMask</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourceAuthActionCapability" />
+    <commandName>
+        <realCommandName>leftauth</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>leftauth2</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationAuthActionCapability" />
+    <commandName>
+        <realCommandName>rightauth</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>rightauth2</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>method</preVariable>
+            <postVariable>eapMethod</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>method</preVariable>
+            <postVariable>xAuthType</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>method</preVariable>
+            <postVariable>keyStrength</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>method</preVariable>
+            <postVariable>trustchain</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>trustchain</preVariable>
+            <postVariable>trustchain</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>trustchain</preVariable>
+            <postVariable>method</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourceCertificateAutorityConditionCapability" />
+    <commandName>
+        <realCommandName>leftca</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>leftca2</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationCertificateAutorityConditionCapability" />
+    <commandName>
+        <realCommandName>rightca</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>rightca2</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourceX509CertificateConditionCapability" />
+    <commandName>
+        <realCommandName>leftcert</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>leftcert2</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationX509CertificateConditionCapability" />
+    <commandName>
+        <realCommandName>rightcert</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>rightcert2</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourceCertificatePolicyConditionCapability" />
+    <commandName>
+        <realCommandName>leftcertpolicy</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationCertificatePolicyConditionCapability" />
+    <commandName>
+        <realCommandName>rightcertpolicy</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourceDNSConditionCapability" />
+    <commandName>
+        <realCommandName>leftdns</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationDNSConditionCapability" />
+    <commandName>
+        <realCommandName>rightdns</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourceFirewallActionCapability" />
+    <commandName>
+        <realCommandName>leftfirewall</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationFirewallActionCapability" />
+    <commandName>
+        <realCommandName>rightfirewall</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourceGroupConditionCapability" />
+    <commandName>
+        <realCommandName>leftgroups</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>leftgroups2</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationGroupConditionCapability" />
+    <commandName>
+        <realCommandName>rightgroups</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>rightgroups2</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourceIdentityConditionCapability" />
+    <commandName>
+        <realCommandName>leftid</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>leftid2</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationIdentityConditionCapability" />
+    <commandName>
+        <realCommandName>rightid</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>rightid2</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourcePortConditionCapability" />
+    <commandName>
+        <realCommandName>leftikeport</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationPortConditionCapability" />
+    <commandName>
+        <realCommandName>rightikeport</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourceRSAPublicKeyActionCapability" />
+    <commandName>
+        <realCommandName>leftrsasigkey</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationRSAPublicKeyActionCapability" />
+    <commandName>
+        <realCommandName>rightrsasigkey</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourcePublicKeyActionCapability" />
+    <commandName>
+        <realCommandName>leftsigkey</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationPublicKeyActionCapability" />
+    <commandName>
+        <realCommandName>rightsigkey</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourceSendCertificateConditionCapability" />
+    <commandName>
+        <realCommandName>leftsendcert</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationSendCertificateConditionCapability" />
+    <commandName>
+        <realCommandName>rightsendcert</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="IpProtocolTypeConditionCapability" />
+    <commandName>
+        <realCommandName />
+    </commandName>
+    <dependency>
+        <conditionalDependency>
+            <nextCapability>EncryptionActionCapability</nextCapability>
+            <separator>=</separator>
+        </conditionalDependency>
+    </dependency>
+    <dependency>
+        <conditionalDependency>
+            <nextCapability>DataAuthenticationActionCapability</nextCapability>
+            <separator>=</separator>
+        </conditionalDependency>
+    </dependency>
+    <dependency>
+        <conditionalDependency>
+            <nextCapability>AEADActionCapability</nextCapability>
+            <separator>=</separator>
+        </conditionalDependency>
+    </dependency>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="AlsoConditionCapability" />
+    <commandName>
+        <realCommandName>also</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="EapIdentityConditionCapability" />
+    <commandName>
+        <realCommandName>eap_identity</realCommandName>
+    </commandName>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="SourceSubnetConditionCapability" />
+    <commandName>
+        <realCommandName>leftsubnet</realCommandName>
+    </commandName>
+    <preferredExpansionMethod>
+        <expansionMethod>
+            <fromOperator>rangeMask</fromOperator>
+            <toOperator>rangeCIDR</toOperator>
+        </expansionMethod>
+    </preferredExpansionMethod>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeMask</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>[</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>proto</postVariable>
+        </concatenatorCondition>
+        <postConcatenator>]</postConcatenator>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>[</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mask</preVariable>
+            <postVariable>proto</postVariable>
+        </concatenatorCondition>
+        <postConcatenator>]</postConcatenator>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>[</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>port</postVariable>
+        </concatenatorCondition>
+        <postConcatenator>]</postConcatenator>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>[</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mask</preVariable>
+            <postVariable>port</postVariable>
+        </concatenatorCondition>
+        <postConcatenator>]</postConcatenator>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>port</preVariable>
+            <postVariable>address</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mask</preVariable>
+            <postVariable>address</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="StrongSwan" />
+    <securityCapability ref="DestinationSubnetConditionCapability" />
+    <commandName>
+        <realCommandName>rightsubnet</realCommandName>
+    </commandName>
+    <preferredExpansionMethod>
+        <expansionMethod>
+            <fromOperator>rangeMask</fromOperator>
+            <toOperator>rangeCIDR</toOperator>
+        </expansionMethod>
+    </preferredExpansionMethod>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeMask</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>[</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>proto</postVariable>
+        </concatenatorCondition>
+        <postConcatenator>]</postConcatenator>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>[</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mask</preVariable>
+            <postVariable>proto</postVariable>
+        </concatenatorCondition>
+        <postConcatenator>]</postConcatenator>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>[</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>port</postVariable>
+        </concatenatorCondition>
+        <postConcatenator>]</postConcatenator>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>[</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mask</preVariable>
+            <postVariable>port</postVariable>
+        </concatenatorCondition>
+        <postConcatenator>]</postConcatenator>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>port</preVariable>
+            <postVariable>address</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mask</preVariable>
+            <postVariable>address</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <internalClauseConcatenator>=</internalClauseConcatenator>
+    <clauseConcatenator>\n</clauseConcatenator>
+</capabilityTranslationDetails>

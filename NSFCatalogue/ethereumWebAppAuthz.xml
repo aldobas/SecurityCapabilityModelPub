@@ -1,0 +1,83 @@
+<nSF id="ethereumWebAppAuthz">
+    <nsfPolicyDetails></nsfPolicyDetails>
+    <securityCapability ref="WalletIDConditionCapability"/>
+    <securityCapability ref="DistributedIDConditionCapability"/>
+    <securityCapability ref="AcceptActionCapability"/>
+    <securityCapability ref="RejectActionCapability"/>
+    <securityCapability ref="ResolutionStrategyCapabilitySpec" />
+    <securityCapability ref="DefaultActionCapabilitySpec"/>
+</nSF>
+
+<!-- capabilityTranslationDetailsfor F2F Use Case -->
+<capabilityTranslationDetails>
+	<nSF ref="ethereumWebAppAuthz" />
+	<securityCapability ref="ResolutionStrategyCapabilitySpec" />
+	<resolutionStrategy>FMR</resolutionStrategy>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+	<nSF ref="ethereumWebAppAuthz" />
+	<securityCapability ref="WalletIDConditionCapability"/>
+	<commandName>
+		<realCommandName>WID</realCommandName>
+	</commandName>
+	<bodyConcatenator>
+		<concatenatorCondition>
+			<preVariable>WID</preVariable>
+		</concatenatorCondition>
+	</bodyConcatenator>
+	<bodyConcatenator>
+		<operatorType>exactMatch</operatorType>
+		<realConcatenator />
+		<concatenatorCondition>
+			<preVariable>exactMatch</preVariable>
+		</concatenatorCondition>
+	</bodyConcatenator>
+	<internalClauseConcatenator>:</internalClauseConcatenator>
+	<bodyValueRestriciton>
+		<attributeName>exactMatch</attributeName>
+		<regexValue>^0x[A-Fa-f0-9]{40}$</regexValue>
+	</bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+	<nSF ref="ethereumWebAppAuthz" />
+	<securityCapability ref="DistributedIDConditionCapability"/>
+	<commandName>
+		<realCommandName>DID</realCommandName>
+	</commandName>
+	<bodyConcatenator>
+		<realConcatenator/>
+		<concatenatorCondition>
+			<preVariable>DID</preVariable>
+		</concatenatorCondition>
+	</bodyConcatenator>
+	<bodyConcatenator>
+		<operatorType>exactMatch</operatorType>
+		<realConcatenator />
+		<concatenatorCondition>
+			<preVariable>exactMatch</preVariable>
+		</concatenatorCondition>
+	</bodyConcatenator>
+	<internalClauseConcatenator>:</internalClauseConcatenator>
+	<bodyValueRestriciton>
+		<attributeName>exactMatch</attributeName>
+		<regexValue>^[A-Za-z0-9]{22}$</regexValue>
+	</bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+	<nSF ref="ethereumWebAppAuthz" />
+	<securityCapability ref="AcceptActionCapability" />
+	<commandName>
+		<realCommandName>ALLOW</realCommandName>
+	</commandName>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+	<nSF ref="ethereumWebAppAuthz" />
+	<securityCapability ref="RejectActionCapability" />
+	<commandName>
+		<realCommandName>BAN</realCommandName>
+	</commandName>
+</capabilityTranslationDetails>

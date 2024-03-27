@@ -1,0 +1,10 @@
+<nSF id="genericPacketFilter">
+    <securityCapability ref="IpProtocolTypeConditionCapability" />
+    <securityCapability ref="IpSourceAddressConditionCapability" />
+    <securityCapability ref="IpDestinationAddressConditionCapability" />
+    <securityCapability ref="SourcePortConditionCapability" />
+    <securityCapability ref="DestinationPortConditionCapability" />
+    <securityCapability ref="AcceptActionCapability"/>
+    <securityCapability ref="RejectActionCapability"/>
+    <securityCapability ref="DefaultActionCapabilitySpec"/>
+</nSF>

@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nSF id="PF-OpenBSD-PacketFilter">
+    <nsfPolicyDetails>
+        <ruleStart />
+        <ruleEnd />
+        <capabilityStart></capabilityStart>
+    </nsfPolicyDetails>
+    <securityCapability ref="AcceptActionCapability"/>
+    <securityCapability ref="RejectActionCapability"/>
+    <securityCapability ref="IpProtocolTypeConditionCapability" />
+    <securityCapability ref="IpSourceAddressConditionCapability" />
+    <securityCapability ref="IpDestinationAddressConditionCapability" />
+    <securityCapability ref="SourcePortConditionCapability"/>
+    <securityCapability ref="DestinationPortConditionCapability"/>
+    <securityCapability ref="InputInterfaceActionCapability" />
+    <securityCapability ref="OutputInterfaceActionCapability" />
+    <securityCapability ref="InterfaceConditionCapability" />
+    <securityCapability ref="TcpFlagsConditionCapability" />
+</nSF>
+
+<!-- PF-OpenBSD-PacketFilter -->
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="AcceptActionCapability" />
+    <commandName>
+        <realCommandName>pass</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="RejectActionCapability" />
+    <commandName>
+        <realCommandName>block</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="IpProtocolTypeConditionCapability" />
+    <commandName>
+        <realCommandName>proto</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <!-- PF supporta union tramite liste che però hanno bisogno di essere racchiuse tra {}, e.g. {udp, tcp}, non so se si può fare-->
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^([0-9]|[1-9][0-9]|[2][0-4][0-9]|2[0-5][0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^([0-9]|[1-9][0-9]|[2][0-4][0-9]|2[0-5][0-5])$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="IpSourceAddressConditionCapability" />
+    <commandName>
+        <realCommandName>from {</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>from !{</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>} </clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <!-- come per i protocolli servirebbe poter specificare un concatenatorStart e un concatenatorEnd per indicare che l'union è racchiusa tra {} -->
+        <operatorType>union</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="IpDestinationAddressConditionCapability" />
+    <commandName>
+        <realCommandName>to {</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>to !{</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>} </clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <!-- come per i protocolli servirebbe poter specificare un concatenatorStart e un concatenatorEnd per indicare che l'union è racchiusa tra {} -->
+        <operatorType>union</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="SourcePortConditionCapability" />
+    <commandName>
+        <realCommandName>port {</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>port != {</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>} </clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <!-- come per i protocolli servirebbe poter specificare un concatenatorStart e un concatenatorEnd per indicare che l'union è racchiusa tra {} -->
+        <operatorType>union</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+        <integerRange>
+            <from>15</from>
+            <to>1</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>tcp</presenceOfValue>
+        <presenceOfCapability>IpSourceAddressConditionCapability</presenceOfCapability>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>udp</presenceOfValue>
+        <presenceOfCapability>IpSourceAddressConditionCapability</presenceOfCapability>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>sctp</presenceOfValue>
+        <presenceOfCapability>IpSourceAddressConditionCapability</presenceOfCapability>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>dccp</presenceOfValue>
+        <presenceOfCapability>IpSourceAddressConditionCapability</presenceOfCapability>
+    </dependency>
+    <!-- 
+        Bisognerebbe avere la possibilità di mettere in AND le dipendenze, qui servirebbe
+        (tcp | udp | sctp | dccp) & (IpSourceAddressConditionCapability)
+    
+    <dependency>
+        Deve esserci la keyword from  per poter specificare port, devono essere una dopo l'altra 
+            bisognerebbe fare si che IpSourceAddressConditionCapability vada di default a "from any"
+        <presenceOfCapability>IpSourceAddressConditionCapability</presenceOfCapability>
+    </dependency> -->
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="DestinationPortConditionCapability" />
+    <commandName>
+        <realCommandName>port {</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>port != {</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>} </clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <!-- come per i protocolli servirebbe poter specificare un concatenatorStart e un concatenatorEnd per indicare che l'union è racchiusa tra {} -->
+        <operatorType>union</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+        <integerRange>
+            <from>15</from>
+            <to>1</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>tcp</presenceOfValue>
+        <presenceOfCapability>IpDestinationAddressConditionCapability</presenceOfCapability>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>udp</presenceOfValue>
+        <presenceOfCapability>IpDestinationAddressConditionCapability</presenceOfCapability>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>sctp</presenceOfValue>
+        <presenceOfCapability>IpDestinationAddressConditionCapability</presenceOfCapability>
+    </dependency>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>dccp</presenceOfValue>
+        <presenceOfCapability>IpDestinationAddressConditionCapability</presenceOfCapability>
+    </dependency>
+    <!-- 
+        Bisognerebbe avere la possibilità di mettere in AND le dipendenze, qui servirebbe
+        (tcp | udp | sctp | dccp) & (IpSourceAddressConditionCapability)
+    
+    <dependency>
+        Deve esserci la keyword from  per poter specificare port, devono essere una dopo l'altra 
+            bisognerebbe fare si che IpSourceAddressConditionCapability vada di default a "from any"
+        <presenceOfCapability>IpSourceAddressConditionCapability</presenceOfCapability>
+    </dependency> -->
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="InterfaceConditionCapability" />
+    <commandName>
+        <realCommandName>on</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <absenceOfCapability>InputInterfaceActionCapability</absenceOfCapability>
+        <absenceOfCapability>OutputInterfaceActionCapability</absenceOfCapability>
+    </dependency>
+</capabilityTranslationDetails>
+
+<!-- Bisognerebbe aggiungere questa capability
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="DirectionConditionCapabiliy" />
+    <commandName>
+        <realCommandName></realCommandName>
+    </commandName>
+</capabilityTranslationDetails>
+
+e poi mettere la dipendeza da essa con il relativo valore nelle input/output interface capabilities
+e.g. per input interface:
+    <dependency>
+        <presenceOfCapability>DirectionConditionCapabiliy</presenceOfCapability>
+        <presenceOfValue>in</presenceOfValue>
+    </dependency>
+-->
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="InputInterfaceActionCapability" />
+    <commandName>
+        <realCommandName>in on</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <absenceOfCapability>InterfaceConditionCapability</absenceOfCapability>
+        <absenceOfCapability>OutputInterfaceActionCapability</absenceOfCapability>
+    </dependency>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="OutputInterfaceActionCapability" />
+    <commandName>
+        <realCommandName>out on</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <absenceOfCapability>InterfaceConditionCapability</absenceOfCapability>
+        <absenceOfCapability>InputInterfaceActionCapability</absenceOfCapability>
+    </dependency>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="PF-OpenBSD-PacketFilter" />
+    <securityCapability ref="TcpFlagsConditionCapability" />
+    <commandName>
+        <realCommandName>flags</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator></realConcatenator>
+        <concatenatorCondition>
+            <preVariable>comp</preVariable>
+            <postVariable>comp</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator></realConcatenator>
+        <concatenatorCondition>
+            <preVariable>mask</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>comp</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator></realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+        <presenceOfValue>TCP</presenceOfValue>
+    </dependency>
+</capabilityTranslationDetails>

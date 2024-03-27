@@ -1,0 +1,529 @@
+<nSF id="sonaeOperatorOutput">
+    <nsfPolicyDetails>
+        <ruleStart>\nNEW RULE\n</ruleStart>
+        <ruleEnd>------------------</ruleEnd>
+        <capabilityStart>   </capabilityStart>
+    </nsfPolicyDetails>
+    <securityCapability ref="IpProtocolTypeConditionCapability" />
+    <securityCapability ref="IpSourceAddressConditionCapability" />
+    <securityCapability ref="IpDestinationAddressConditionCapability" />
+    <securityCapability ref="SourcePortConditionCapability" />
+    <securityCapability ref="DestinationPortConditionCapability" />
+    <securityCapability ref="AcceptActionCapability"/>
+    <securityCapability ref="RejectActionCapability"/>
+    <securityCapability ref="DefaultActionCapabilitySpec"/>
+</nSF>
+
+<!-- sonaeOperatorOutput -->
+
+<capabilityTranslationDetails>
+    <nSF ref="sonaeOperatorOutput" />
+    <securityCapability ref="IpProtocolTypeConditionCapability" />
+    <commandName>
+        <realCommandName>IP Protocol Type =</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>IP Protocol Type !=</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^([0-9]|[1-9][0-9]|[2][0-4][0-9]|2[0-5][0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^([0-9]|[1-9][0-9]|[2][0-4][0-9]|2[0-5][0-5])$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+
+<capabilityTranslationDetails>
+    <nSF ref="sonaeOperatorOutput" />
+    <securityCapability ref="IpSourceAddressConditionCapability" />
+    <commandName>
+        <realCommandName>IP Source = </realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>IP Source != </realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <preferredExpansionMethod>
+        <expansionMethod>
+            <fromOperator>rangeMask</fromOperator>
+            <toOperator>rangeCIDR</toOperator>
+        </expansionMethod>
+    </preferredExpansionMethod>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+        <newCommandName>
+            <realCommandName>IP SOURCE RANGE = </realCommandName>
+        </newCommandName>
+        <newCommandName>
+            <realCommandName>IP SOURCE RANGE = </realCommandName>
+            <commandNameCondition>
+                <attributeName>operation</attributeName>
+                <attributeValue>NOT_EQUAL_TO</attributeValue>
+            </commandNameCondition>
+        </newCommandName>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeMask</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="sonaeOperatorOutput" />
+    <securityCapability ref="IpDestinationAddressConditionCapability" />
+    <commandName>
+        <realCommandName>IP DESTINATION = </realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>IP DESTINATION = </realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <preferredExpansionMethod>
+        <expansionMethod>
+            <fromOperator>rangeMask</fromOperator>
+            <toOperator>rangeCIDR</toOperator>
+        </expansionMethod>
+    </preferredExpansionMethod>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>-</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+        <newCommandName>
+            <realCommandName>IP DESTINATION RANGE = </realCommandName>
+        </newCommandName>
+        <newCommandName>
+            <realCommandName>IP DESTINATION RANGE != </realCommandName>
+            <commandNameCondition>
+                <attributeName>operation</attributeName>
+                <attributeValue>NOT_EQUAL_TO</attributeValue>
+            </commandNameCondition>
+        </newCommandName>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeMask</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>rangeCIDR</operatorType>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>maskCIDR</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>/</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>address</preVariable>
+            <postVariable>mask</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regexValue>
+    </bodyValueRestriciton>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="sonaeOperatorOutput" />
+    <securityCapability ref="SourcePortConditionCapability" />
+    <commandName>
+        <realCommandName>SOURCE PORT =</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>SOURCE PORT !=</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+        <newCommandName>
+            <realCommandName>SOURCE PORT RANGE=</realCommandName>
+        </newCommandName>
+        <newCommandName>
+            <realCommandName>SOURCE PORT RANGE !=</realCommandName>
+            <commandNameCondition>
+                <attributeName>operation</attributeName>
+                <attributeValue>NOT_EQUAL_TO</attributeValue>
+            </commandNameCondition>
+        </newCommandName>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+        <newCommandName>
+            <realCommandName>SOURCE PORT RANGE =</realCommandName>
+        </newCommandName>
+        <newCommandName>
+            <realCommandName>SOURCE PORT RANGE !=</realCommandName>
+            <commandNameCondition>
+                <attributeName>operation</attributeName>
+                <attributeValue>NOT_EQUAL_TO</attributeValue>
+            </commandNameCondition>
+        </newCommandName>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startValue</preVariable>
+            <postVariable>endValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startName</preVariable>
+            <postVariable>endName</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startValue</preVariable>
+            <postVariable>endName</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startName</preVariable>
+            <postVariable>endValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+        <integerRange>
+            <from>15</from>
+            <to>1</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <!-- <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+    </dependency> -->
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="sonaeOperatorOutput" />
+    <securityCapability ref="DestinationPortConditionCapability" />
+    <commandName>
+        <realCommandName>DESTINATION PORT =</realCommandName>
+    </commandName>
+    <commandName>
+        <realCommandName>DESTINATION PORT !=</realCommandName>
+        <commandNameCondition>
+            <attributeName>operation</attributeName>
+            <attributeValue>NOT_EQUAL_TO</attributeValue>
+        </commandNameCondition>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>union</operatorType>
+        <realConcatenator>,</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>elementRange</preVariable>
+            <postVariable>elementValue</postVariable>
+        </concatenatorCondition>
+        <newCommandName>
+            <realCommandName>DESTINATION PORT RANGE =</realCommandName>
+        </newCommandName>
+        <newCommandName>
+            <realCommandName>DESTINATION PORT RANGE !=</realCommandName>
+            <commandNameCondition>
+                <attributeName>operation</attributeName>
+                <attributeValue>NOT_EQUAL_TO</attributeValue>
+            </commandNameCondition>
+        </newCommandName>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <operatorType>range</operatorType>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>start</preVariable>
+            <postVariable>end</postVariable>
+        </concatenatorCondition>
+        <newCommandName>
+            <realCommandName>DESTINATION PORT RANGE =</realCommandName>
+        </newCommandName>
+        <newCommandName>
+            <realCommandName>DESTINATION PORT RANGE !=</realCommandName>
+            <commandNameCondition>
+                <attributeName>operation</attributeName>
+                <attributeValue>NOT_EQUAL_TO</attributeValue>
+            </commandNameCondition>
+        </newCommandName>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startValue</preVariable>
+            <postVariable>endValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startName</preVariable>
+            <postVariable>endName</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startValue</preVariable>
+            <postVariable>endName</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyConcatenator>
+        <realConcatenator>:</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>startName</preVariable>
+            <postVariable>endValue</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+    <bodyValueRestriciton>
+        <attributeName>start</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>end</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+        <integerRange>
+            <from>15</from>
+            <to>1</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>elementValue</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <bodyValueRestriciton>
+        <attributeName>exactMatch</attributeName>
+        <regexValue>^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$</regexValue>
+        <integerRange>
+            <from>0</from>
+            <to>65535</to>
+        </integerRange>
+    </bodyValueRestriciton>
+    <!-- <dependency>
+        <presenceOfCapability>IpProtocolTypeConditionCapability</presenceOfCapability>
+    </dependency> -->
+</capabilityTranslationDetails>
+
+
+<capabilityTranslationDetails>
+    <nSF ref="sonaeOperatorOutput" />
+    <securityCapability ref="AcceptActionCapability" />
+    <commandName>
+        <realCommandName>Action: ACCEPT</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="sonaeOperatorOutput" />
+    <securityCapability ref="RejectActionCapability" />
+    <commandName>
+        <realCommandName>Action: REJECT</realCommandName>
+    </commandName>
+    <clauseConcatenator>\n</clauseConcatenator>
+    <bodyConcatenator>
+        <operatorType>exactMatch</operatorType>
+        <realConcatenator />
+        <concatenatorCondition>
+            <preVariable>exactMatch</preVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
+
+<capabilityTranslationDetails>
+    <nSF ref="sonaeOperatorOutput" />
+    <securityCapability ref="DefaultActionCapabilitySpec" />
+    <commandName>
+        <realCommandName>\nDEFAULT</realCommandName>
+    </commandName>
+    <bodyConcatenator>
+        <realConcatenator>\n</realConcatenator>
+        <concatenatorCondition>
+            <preVariable>filterActionCapability</preVariable>
+            <postVariable>\n</postVariable>
+        </concatenatorCondition>
+    </bodyConcatenator>
+</capabilityTranslationDetails>
