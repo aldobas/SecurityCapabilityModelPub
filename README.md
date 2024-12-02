@@ -1,2 +1,2 @@
 # SecurityCapabilityModelPub
-This is the repository where we put data that are ready to be shared
+Ready-to-be-shared data will be uploaded to this repository
