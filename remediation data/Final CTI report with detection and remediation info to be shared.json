@@ -1,0 +1,435 @@
+{
+    "_comment": "This is a redacted version for reporting purposes, and as is not objectively compliant with latest version CACAO. ",
+    "type": "bundle",
+    "id": "bundle--29addfa2-2706-465f-8102-d43797f72356",
+    "objects": [
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--e8c107fe-92cb-407e-9912-5cd4a8b3aa19",
+            "created_by_ref": "identity--3826e082-a0c4-46e6-bbed-586ba2a337ba",
+            "created": "2025-04-03T13:55:50.037427Z",
+            "modified": "2025-04-03T13:55:50.037427Z",
+            "relationship_type": "mitigates",
+            "source_ref": "course-of-action--5b57c5b2-2f6b-45ff-975c-5c543a36add0",
+            "target_ref": "indicator--df7adfb1-9668-4fe9-92cb-42e106711205"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--e96ca28d-5b4a-4991-900a-b77a6147cdff",
+            "created_by_ref": "identity--3826e082-a0c4-46e6-bbed-586ba2a337ba",
+            "created": "2025-04-03T13:55:50.037526Z",
+            "modified": "2025-04-03T13:55:50.037526Z",
+            "relationship_type": "refers-to",
+            "source_ref": "identity--3826e082-a0c4-46e6-bbed-586ba2a337ba",
+            "target_ref": "report--92114365-8a29-4c35-9444-6a6cc286caea"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--8149a4d4-4f65-49d8-b267-d1d12baff97f",
+            "created_by_ref": "identity--3826e082-a0c4-46e6-bbed-586ba2a337ba",
+            "created": "2025-04-03T13:55:50.037618Z",
+            "modified": "2025-04-03T13:55:50.037618Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--df7adfb1-9668-4fe9-92cb-42e106711205",
+            "target_ref": "malware--97011e79-90bf-4738-b0cb-5e0ef0554ce6"
+        },
+        {
+            "type": "relationship",
+            "spec_version": "2.1",
+            "id": "relationship--ae5bbc1b-a695-4939-bf14-4763e26d5d00",
+            "created_by_ref": "identity--3826e082-a0c4-46e6-bbed-586ba2a337ba",
+            "created": "2025-04-03T13:55:50.037707Z",
+            "modified": "2025-04-03T13:55:50.037707Z",
+            "relationship_type": "refers-to",
+            "source_ref": "report--92114365-8a29-4c35-9444-6a6cc286caea",
+            "target_ref": "malware--97011e79-90bf-4738-b0cb-5e0ef0554ce6"
+        },
+        {
+            "type": "report",
+            "spec_version": "2.1",
+            "id": "report--92114365-8a29-4c35-9444-6a6cc286caea",
+            "created": "2025-04-03T13:55:50.037273Z",
+            "modified": "2025-04-03T13:55:50.037273Z",
+            "name": "Botnet remediation",
+            "published": "2025-02-10T12:34:56Z",
+            "object_refs": [
+                "indicator--df7adfb1-9668-4fe9-92cb-42e106711205",
+                "course-of-action--5b57c5b2-2f6b-45ff-975c-5c543a36add0",
+                "identity--3826e082-a0c4-46e6-bbed-586ba2a337ba",
+                "extension-definition--f57fac2f-7a51-4d5b-854a-c0a862a7aaec"
+            ]
+        },
+        {
+            "type": "indicator",
+            "spec_version": "2.1",
+            "id": "indicator--df7adfb1-9668-4fe9-92cb-42e106711205",
+            "created": "2025-04-03T13:55:50.028778Z",
+            "modified": "2025-04-03T13:55:50.028778Z",
+            "name": "Command and control traffic",
+            "description": "This traffic indicates the source host is trying to reach to his command and control server",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "pattern": "[network-traffic:dst_ref.type = 'ipv4-addr' AND network-traffic:dst_ref.value = '54.154.132.12' AND network-traffic:dst_port.value = '22']",
+            "pattern_type": "stix",
+            "pattern_version": "2.1",
+            "valid_from": "2020-02-01T12:34:56Z",
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "lockheed-martin-cyber-kill-chain",
+                    "phase_name": "Command and Control"
+                }
+            ],
+            "labels": [
+                "malicious-activity"
+            ]
+        },
+        {
+            "type": "course-of-action",
+            "spec_version": "2.1",
+            "id": "course-of-action--5b57c5b2-2f6b-45ff-975c-5c543a36add0",
+            "created_by_ref": "identity--3826e082-a0c4-46e6-bbed-586ba2a337ba",
+            "created": "2025-04-03T13:55:50.036739Z",
+            "modified": "2025-04-03T13:55:50.036739Z",
+            "name": "CACAO Playbook",
+            "description": "This a CACAO Playbook course of action for a rule of type level 4 filtering ",
+            "extensions": {
+                "extension-definition--f57fac2f-7a51-4d5b-854a-c0a862a7aaec": {
+                    "extension_type": "property-extension",
+                    "cacao_playbook": {
+                        "created": "2025",
+                        "created_by": "Politecnico di Torino",
+                        "extension_definitions": {
+                            "extension-definition--11": {
+                                "created_by": null,
+                                "description": null,
+                                "name": "iterate_on extension",
+                                "schema": null,
+                                "type": null,
+                                "version": null
+                            }
+                        },
+                        "id": "playbook--0",
+                        "modified": "2025",
+                        "name": "playbookName",
+                        "playbook_types": [
+                            "remediation"
+                        ],
+                        "playbook_variables": {},
+                        "spec_version": "1.1",
+                        "type": "playbook",
+                        "workflow": {
+                            "step--1": {
+                                "on_completion": "step--3",
+                                "type": "start"
+                            },
+                            "step--10": {
+                                "on_completion": "step--12",
+                                "type": "end"
+                            },
+                            "step--12": {
+                                "commands": [
+                                    {
+                                        "command": "list_paths from $$impacted_host_ip$$ to attacker",
+                                        "type": "manual"
+                                    }
+                                ],
+                                "in_args": [],
+                                "on_completion": "step--13",
+                                "out_args": [
+                                    "$$path_list$$"
+                                ],
+                                "type": "single"
+                            },
+                            "step--13": {
+                                "condition": "$$iterationIndex$$ < $$path_list.length$$",
+                                "on_false": [
+                                    "step--19"
+                                ],
+                                "on_true": [
+                                    "step--14"
+                                ],
+                                "step_extensions": {
+                                    "extension-definition--11": {
+                                        "info": "Interpreter will treat this while as a for each statement",
+                                        "iterate_on": "path_list",
+                                        "type_of_while": "iterate_on"
+                                    }
+                                },
+                                "step_variables": {
+                                    "iterationIndex": {
+                                        "constant": false,
+                                        "description": "nothing",
+                                        "type": "undefined",
+                                        "value": 0
+                                    }
+                                },
+                                "type": "while-condition"
+                            },
+                            "step--14": {
+                                "commands": [
+                                    {
+                                        "command": "find_node of type firewalll in $$iteration_element$$",
+                                        "type": "manual"
+                                    }
+                                ],
+                                "in_args": [],
+                                "on_completion": "step--15",
+                                "out_args": [
+                                    "$$path_list$$",
+                                    "$$found$$"
+                                ],
+                                "type": "single"
+                            },
+                            "step--15": {
+                                "condition": "$$found$$:value = true",
+                                "on_false": [
+                                    "step--18"
+                                ],
+                                "on_true": [
+                                    "step--16"
+                                ],
+                                "type": "if-condition"
+                            },
+                            "step--16": {
+                                "commands": [
+                                    {
+                                        "command": "add_firewall behind $$impacted_host_ip$$ in $$iteration_element$$ with",
+                                        "type": "manual"
+                                    }
+                                ],
+                                "in_args": [],
+                                "on_completion": "step--17",
+                                "out_args": [
+                                    "$$new_node$$"
+                                ],
+                                "type": "single"
+                            },
+                            "step--17": {
+                                "commands": [
+                                    {
+                                        "command": "add_filtering_rules rules to $$new_node$$",
+                                        "type": "manual"
+                                    }
+                                ],
+                                "in_args": [],
+                                "out_args": [],
+                                "type": "single"
+                            },
+                            "step--18": {
+                                "commands": [
+                                    {
+                                        "command": "add_filtering_rules rules to $$found_node$$",
+                                        "type": "manual"
+                                    }
+                                ],
+                                "in_args": [],
+                                "out_args": [],
+                                "type": "single"
+                            },
+                            "step--19": {
+                                "type": "end"
+                            },
+                            "step--3": {
+                                "commands": [
+                                    {
+                                        "command": "list_paths from $$impacted_host_ip$$ to attacker",
+                                        "type": "manual"
+                                    }
+                                ],
+                                "in_args": [],
+                                "on_completion": "step--4",
+                                "out_args": [
+                                    "$$path_list$$"
+                                ],
+                                "type": "single"
+                            },
+                            "step--4": {
+                                "condition": "$$iterationIndex$$ < $$path_list.length$$",
+                                "on_false": [
+                                    "step--10"
+                                ],
+                                "on_true": [
+                                    "step--5"
+                                ],
+                                "step_extensions": {
+                                    "extension-definition--2": {
+                                        "info": "Interpreter will treat this while as a for each statement",
+                                        "iterate_on": "path_list",
+                                        "type_of_while": "iterate_on"
+                                    }
+                                },
+                                "step_variables": {
+                                    "iterationIndex": {
+                                        "constant": false,
+                                        "description": "nothing",
+                                        "type": "undefined",
+                                        "value": 0
+                                    }
+                                },
+                                "type": "while-condition"
+                            },
+                            "step--5": {
+                                "commands": [
+                                    {
+                                        "command": "find_node of type firewalll in $$iteration_element$$",
+                                        "type": "manual"
+                                    }
+                                ],
+                                "in_args": [],
+                                "on_completion": "step--6",
+                                "out_args": [
+                                    "$$path_list$$",
+                                    "$$found$$"
+                                ],
+                                "type": "single"
+                            },
+                            "step--6": {
+                                "condition": "$$found$$:value = true",
+                                "on_false": [
+                                    "step--9"
+                                ],
+                                "on_true": [
+                                    "step--7"
+                                ],
+                                "type": "if-condition"
+                            },
+                            "step--7": {
+                                "commands": [
+                                    {
+                                        "command": "add_firewall behind $$impacted_host_ip$$ in $$iteration_element$$ with",
+                                        "type": "manual"
+                                    }
+                                ],
+                                "in_args": [],
+                                "on_completion": "step--8",
+                                "out_args": [
+                                    "$$new_node$$"
+                                ],
+                                "type": "single"
+                            },
+                            "step--8": {
+                                "commands": [
+                                    {
+                                        "command": "add_filtering_rules rules to $$new_node$$",
+                                        "type": "manual"
+                                    }
+                                ],
+                                "in_args": [],
+                                "out_args": [],
+                                "type": "single"
+                            },
+                            "step--9": {
+                                "commands": [
+                                    {
+                                        "command": "add_filtering_rules rules to $$found_node$$",
+                                        "type": "manual"
+                                    }
+                                ],
+                                "in_args": [],
+                                "out_args": [],
+                                "type": "single"
+                            }
+                        },
+                        "workflow_start": "step--1"
+                    }
+                }
+            }
+        },
+        {
+            "type": "identity",
+            "spec_version": "2.1",
+            "id": "identity--3826e082-a0c4-46e6-bbed-586ba2a337ba",
+            "created": "2025-04-03T13:55:50.02564Z",
+            "modified": "2025-04-03T13:55:50.02564Z",
+            "name": "Politecnico di Torino",
+            "identity_class": "organization"
+        },
+        {
+            "type": "sighting",
+            "spec_version": "2.1",
+            "id": "sighting--665f8ded-84fb-474f-b7cd-eba5eb3de684",
+            "created_by_ref": "identity--3826e082-a0c4-46e6-bbed-586ba2a337ba",
+            "created": "2025-04-03T13:55:50.037839Z",
+            "modified": "2025-04-03T13:55:50.037839Z",
+            "count": 1,
+            "sighting_of_ref": "indicator--df7adfb1-9668-4fe9-92cb-42e106711205",
+            "observed_data_refs": [
+                "observed-data--b2aa34d6-1780-4f1c-b03b-6c200623d16d"
+            ]
+        },
+        {
+            "type": "extension-definition",
+            "spec_version": "2.1",
+            "id": "extension-definition--f57fac2f-7a51-4d5b-854a-c0a862a7aaec",
+            "created_by_ref": "identity--3826e082-a0c4-46e6-bbed-586ba2a337ba",
+            "created": "2025-04-03T13:55:50.025935Z",
+            "modified": "2025-04-03T13:55:50.025935Z",
+            "name": "CACAO Course of Action",
+            "schema": "https://www.oasis.org/cacao.json",
+            "version": "0.1",
+            "extension_types": [
+                "property-extension"
+            ],
+            "extension_properties": [
+                "cacao_playbook"
+            ]
+        },
+        {
+            "type": "observed-data",
+            "spec_version": "2.1",
+            "id": "observed-data--b2aa34d6-1780-4f1c-b03b-6c200623d16d",
+            "created": "2025-04-03T13:55:50.028153Z",
+            "modified": "2025-04-03T13:55:50.028153Z",
+            "first_observed": "2020-02-01T12:34:55Z",
+            "last_observed": "2020-02-01T12:34:57Z",
+            "number_observed": 1,
+            "object_refs": [
+                "ipv4-addr--6b8eb809-9746-5868-aee6-42c4a4b34228",
+                "ipv4-addr--c55a4ce3-0755-5734-86dd-6f4e19f7eba1",
+                "network-traffic--b2160560-4f6b-561c-ad8b-c51f67bbbefb"
+            ]
+        },
+        {
+            "type": "ipv4-addr",
+            "spec_version": "2.1",
+            "id": "ipv4-addr--6b8eb809-9746-5868-aee6-42c4a4b34228",
+            "value": "12.12.12.12"
+        },
+        {
+            "type": "ipv4-addr",
+            "spec_version": "2.1",
+            "id": "ipv4-addr--c55a4ce3-0755-5734-86dd-6f4e19f7eba1",
+            "value": "10.1.0.10"
+        },
+        {
+            "type": "network-traffic",
+            "spec_version": "2.1",
+            "id": "network-traffic--b2160560-4f6b-561c-ad8b-c51f67bbbefb",
+            "src_ref": "ipv4-addr--c55a4ce3-0755-5734-86dd-6f4e19f7eba1",
+            "dst_ref": "ipv4-addr--6b8eb809-9746-5868-aee6-42c4a4b34228",
+            "dst_port": 80,
+            "protocols": [
+                "tcp"
+            ]
+        },
+        {
+            "type": "malware",
+            "spec_version": "2.1",
+            "id": "malware--97011e79-90bf-4738-b0cb-5e0ef0554ce6",
+            "created": "2025-04-03T13:55:50.028641Z",
+            "modified": "2025-04-03T13:55:50.028641Z",
+            "name": "Cridex",
+            "is_family": false,
+            "kill_chain_phases": [
+                {
+                    "kill_chain_name": "lockheed-martin-cyber-kill-chain",
+                    "phase_name": "Exploit"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Enforce IP ban
+-->
+<hspl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://www.palantir-project.eu hspl.xsd">
+        <subject type="ip_address">10.1.0.10</subject>
+        <action>is not authorized to access</action>
+        <object>Internet</object>
+</hspl>
