@@ -1,0 +1,72 @@
+<policy nsfName="IpTables" targetRuleSet="INPUT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="language_ipTables.xsd">
+	<rule id="0">
+		<rejectActionCapability />
+		<ipProtocolTypeConditionCapability operator="exactMatch">
+			<capabilityValue>
+				<exactMatch>tcp</exactMatch>
+			</capabilityValue>
+		</ipProtocolTypeConditionCapability>
+		<ipSourceAddressConditionCapability operator="exactMatch">
+			<capabilityIpValue>
+				<exactMatch>192.168.1.1</exactMatch>
+			</capabilityIpValue>
+		</ipSourceAddressConditionCapability>
+		<ipDestinationAddressConditionCapability operator="exactMatch">
+			<capabilityIpValue>
+				<exactMatch>192.168.1.2</exactMatch>
+			</capabilityIpValue>
+		</ipDestinationAddressConditionCapability>
+	</rule>
+	<rule id="1">
+		<rejectActionCapability />
+		<ipProtocolTypeConditionCapability operator="exactMatch">
+			<capabilityValue>
+				<exactMatch>tcp</exactMatch>
+			</capabilityValue>
+		</ipProtocolTypeConditionCapability>
+		<ipSourceAddressConditionCapability operator="exactMatch">
+			<capabilityIpValue>
+				<exactMatch>any</exactMatch>
+			</capabilityIpValue>
+		</ipSourceAddressConditionCapability>
+		<sourcePortConditionCapability operator="exactMatch">
+			<capabilityValue>
+				<exactMatch>80</exactMatch>
+			</capabilityValue>
+		</sourcePortConditionCapability>
+		<ipDestinationAddressConditionCapability operator="exactMatch">
+            <capabilityIpValue>
+                <exactMatch>192.168.0.1</exactMatch>
+            </capabilityIpValue>
+        </ipDestinationAddressConditionCapability>
+		<destinationPortConditionCapability operator="union">
+			<capabilityValue>
+				<union>
+					<elementValue>10</elementValue>
+					<elementValue>20</elementValue>
+					<elementValue>30</elementValue>
+				</union>
+			</capabilityValue>
+		</destinationPortConditionCapability>
+	</rule>
+	<rule id="2">
+		<rejectActionCapability />
+		<inputInterfaceActionCapability>
+			<inFa>eth0</inFa>
+		</inputInterfaceActionCapability>
+		<ipProtocolTypeConditionCapability operator="exactMatch">
+			<capabilityValue>
+				<exactMatch>TCP</exactMatch>
+			</capabilityValue>
+		</ipProtocolTypeConditionCapability>
+		<ipSourceAddressConditionCapability operator="rangeCIDR">
+			<capabilityIpValue>
+				<rangeCIDR>
+					<address>10.0.2.0</address>
+					<maskCIDR>24</maskCIDR>
+				</rangeCIDR>
+			</capabilityIpValue>
+		</ipSourceAddressConditionCapability>
+	</rule>
+</policy>
+    
