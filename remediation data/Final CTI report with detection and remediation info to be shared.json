@@ -73,10 +73,10 @@
             "indicator_types": [
                 "malicious-activity"
             ],
-            "pattern": "[network-traffic:dst_ref.type = 'ipv4-addr' AND network-traffic:dst_ref.value = '54.154.132.12' AND network-traffic:dst_port.value = '22']",
+            "pattern": "[network-traffic:dst_ref.type = 'ipv4-addr' AND network-traffic:dst_ref.value = '12.12.12.12' AND network-traffic:dst_port.value = '80']",
             "pattern_type": "stix",
             "pattern_version": "2.1",
-            "valid_from": "2020-02-01T12:34:56Z",
+            "valid_from": "2025-04-03T13:55:50.036739Z",
             "kill_chain_phases": [
                 {
                     "kill_chain_name": "lockheed-martin-cyber-kill-chain",

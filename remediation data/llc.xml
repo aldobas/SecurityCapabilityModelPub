@@ -1,0 +1,1 @@
+iptables -A FORWARD -p TCP -s 10.1.0.10/32 -d 12.12.12.12/32 -j DROP
